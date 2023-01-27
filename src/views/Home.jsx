@@ -1,37 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { API_KEY } from "../env";
-import Movie from "../Components/Movie";
+import React from "react";
 import Header from "../Components/Header";
+import MoviesList from "../Components/MoviesList";
 
-function HomePage(){
-    const API_URL =
-    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
-
-  const [movies, setMovies] = useState([]);
-
- useEffect(() => {
-   fetch(API_URL)
-       .then((response) => response.json())
-       .then((result) => {
-       setMovies(result.results);
-     });
-  }, []);
-     return(
-        <>
+function HomePage() {
+    return (
+      <div>
         <Header/>
-        <div className="App">
-        <h1>Popular now</h1>
-        <div className="popular-movies">
-          {movies.map((movie) => {
-            return <Movie key={movie.id} movie={movie} />;
-          })}
-        </div>
+        <MoviesList/>
       </div>
-      </>
-     )
+    );
+  }
+  
+  export default HomePage;
     
-   
-};
-
-
-export default HomePage;
