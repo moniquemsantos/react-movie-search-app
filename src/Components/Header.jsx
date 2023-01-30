@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 //import IconButton from "@mui/material/IconButton";
 //import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputBase from "@mui/material/InputBase";
@@ -66,20 +67,21 @@ function Header(){
         setUser(null);
 
     }
-    
+  
     
       return (
           <Box sx={{ flexGrow: 1 }}>
             <AppBar sx={styles.customColor} position="static">
               <Toolbar>
-                <Typography
+              <Link to="/">Home</Link>
+                {/* <Typography
                   variant="h6"
                   noWrap
                   component="div"
                   sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
                 >
                   MOVIES
-                </Typography>
+                </Typography> */}
                 <Search>
                   <SearchIconWrapper>
                     <SearchIcon />

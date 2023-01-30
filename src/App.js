@@ -5,6 +5,8 @@ import { MoviesContextProvider } from "./store/MoviesContext";
 import HomePage from "./views/Home";
 import Login from "./views/Login";
 import SignUp from "./views/SignUp";
+import UserProfile from "./Components/UserProfile";
+import ProtectedRoute from "./Components/routes/ProtectedRoute";
 
 // TO-DO list :
 // create your Routes : install react-router and create routes : /, /:singleMovieDetails, /login, /register,/chat,  /userProfile,
@@ -20,6 +22,15 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="userprofile" element={<UserProfile />} />
+          <Route 
+            path="userprofile" 
+            element={
+            <ProtectedRoute>
+            <UserProfile />
+            </ProtectedRoute>
+           }
+           />
         </Routes>
       </MoviesContextProvider>
     
