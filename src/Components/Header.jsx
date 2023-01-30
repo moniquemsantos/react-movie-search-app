@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+//import IconButton from "@mui/material/IconButton";
+//import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import red from "@mui/material/colors/red";
+import { AuthContext } from "../store/AuthContext";
 
 function Header(){
     const Search = styled("div")(({ theme }) => ({
@@ -58,6 +59,13 @@ function Header(){
           backgroundColor: red[500],
         },
       };
+
+      const {login, user, setUser} = useContext(AuthContext);
+
+      const logout = () =>{
+        setUser(null);
+
+    }
     
     
       return (
@@ -93,9 +101,12 @@ function Header(){
                   </Button>
                 </Search>
                 <div>
-                  <IconButton>
+                  {user ? (<Button onClick={logout} variant="">Logout</Button>) : <Button onClick={login} variant="contained">Login</Button>}
+                  
+                  
+                  {/* <IconButton onClick={login}>
                     <AccountCircle />
-                  </IconButton>
+                  </IconButton> */}
                 </div>
               </Toolbar>
             </AppBar>
