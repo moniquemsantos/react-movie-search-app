@@ -15,6 +15,9 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const {register}=useContext(AuthContext)
+
+
+    //Try do do some logic to not allow the user go further without to insert the right type of input (field email needs to be filled with email and the password needs to have 6 characters)
     
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
