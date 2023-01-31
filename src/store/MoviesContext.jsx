@@ -1,5 +1,5 @@
 import { createContext,  useState } from "react";
-import { API_KEY } from "../env";
+import { API_KEY } from "../config/.env";
 
 
 
