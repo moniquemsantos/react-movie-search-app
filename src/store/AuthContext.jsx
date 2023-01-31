@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 
 
 export const AuthContextProvider = (props) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState();
     
     const register = async (email, password) => { 
         console.log(email, password);
@@ -19,13 +19,13 @@ export const AuthContextProvider = (props) => {
           password
         );
     
-        const user = userCredential.user;
-        console.log("user :>> ", user);
-        setUser(userCredential.user);
+        const loggedUser = userCredential.user;
+        console.log("user :>> ", loggedUser);
+        setUser(loggedUser);
       } catch (error) {
-        console.log("error", error);
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(`Error: ${errorCode} - ${errorMessage}`);
     }
    };
 

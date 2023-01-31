@@ -6,7 +6,7 @@ import HomePage from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
 import UserProfile from "./Components/UserProfile";
-import ProtectedRoute from "./Components/routes/ProtectedRoute";
+import ProtectedRoute from "./routes/ProtectedRoute";
 import { app } from "./config/firebaseConfig";
 
 // TO-DO list :
@@ -24,7 +24,6 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
-            <Route path="userprofile" element={<UserProfile />} />
             <Route
               path="userprofile"
               element={
