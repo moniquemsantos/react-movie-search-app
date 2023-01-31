@@ -8,9 +8,7 @@ function ProtectedRoute({children}) {
 
     const isUser = user ? true : false;
 
-    return
-        <>
-        {isUser ? children : <Navigate to="/" />} </>;
+    return <>{isUser ? children : <Navigate to="/" />} </>;
 }
     
 
