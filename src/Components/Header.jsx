@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -12,6 +12,9 @@ import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import red from "@mui/material/colors/red";
 import { AuthContext } from "../store/AuthContext";
+import { MoviesContext } from "../store/MoviesContext";
+import { useState } from "react";
+
 
 function Header(){
     const Search = styled("div")(({ theme }) => ({
@@ -61,13 +64,21 @@ function Header(){
         },
       };
 
+      let searchInput = useRef();
+
       const {login, user, setUser} = useContext(AuthContext);
+
+      const {searchMovies} = useContext(MoviesContext);
 
       const logout = () =>{
         setUser(null);
 
     }
-  
+
+      const handleSearch = () => {
+        console.log("search term", searchInput.current.value);
+        searchMovies(searchInput.current.value)
+      };
     
       return (
           <Box sx={{ flexGrow: 1 }}>
@@ -88,17 +99,13 @@ function Header(){
                   </SearchIconWrapper>
     
                   <StyledInputBase
-                    placeholder=""
+                    placeholder="Movie Title"
                     aria-label="search"
                     name="query"
                     type="text"
-                    //inputRef={searchText}
-                    // value={query}
-                    // onChange={(e)=>{
-                    //   console.log(e.target.value);
-                    //   setQuery(e.target.value)}}
+                    inputRef={searchInput}
                   />
-                  <Button variant="text">
+                  <Button variant="text" onClick={handleSearch}>
                     Search
                   </Button>
                 </Search>
