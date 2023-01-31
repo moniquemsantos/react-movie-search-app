@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { AuthContextProvider } from "./store/AuthContext";
 import { MoviesContextProvider } from "./store/MoviesContext";
 import HomePage from "./views/Home";
 import Login from "./views/Login";
@@ -13,7 +14,7 @@ import SignUp from "./views/SignUp";
 function App() {
   return (
     <div>
-      <p>sdsfsfsdsdfsd</p>
+      <AuthContextProvider>
       <MoviesContextProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -21,7 +22,9 @@ function App() {
           <Route path="signup" element={<SignUp />} />
         </Routes>
       </MoviesContextProvider>
-    </div>
+    
+      </AuthContextProvider>
+      </div>
   );
 }
 
