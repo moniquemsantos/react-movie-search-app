@@ -3,7 +3,7 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+//import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 //import IconButton from "@mui/material/IconButton";
 //import AccountCircle from "@mui/icons-material/AccountCircle";
@@ -104,8 +104,7 @@ function Header(){
                 </Search>
                 <div>
                   {user ? (<Button onClick={logout} variant="">Logout</Button>) : <Button onClick={login} variant="contained">Login</Button>}
-                  
-                  
+                  <Link to="/register">Register</Link>
                   {/* <IconButton onClick={login}>
                     <AccountCircle />
                   </IconButton> */}
