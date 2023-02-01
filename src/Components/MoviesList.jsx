@@ -5,11 +5,9 @@ import { MoviesContext } from "../store/MoviesContext.jsx";
 function MoviesList(){
     
 const {movies, fetchMovies} = useContext(MoviesContext)
-console.log('movies :>> ', movies);
 
  useEffect(() => {
-  fetchMovies()
-   
+  fetchMovies()   
   }, []);
      return(
         <div className="App">

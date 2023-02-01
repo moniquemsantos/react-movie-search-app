@@ -76,7 +76,7 @@ function Header(){
       const navigate = useNavigate();
 
       const handleLogin = () => {
-        navigate ("/login");
+        navigate("/login");
       }
 
     
