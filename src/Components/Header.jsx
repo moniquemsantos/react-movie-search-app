@@ -13,8 +13,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import red from "@mui/material/colors/red";
 import { AuthContext } from "../store/AuthContext";
 import { MoviesContext } from "../store/MoviesContext";
-import { useState } from "react";
-
 
 function Header(){
     const Search = styled("div")(({ theme }) => ({
@@ -66,14 +64,9 @@ function Header(){
 
       let searchInput = useRef();
 
-      const {login, user, setUser} = useContext(AuthContext);
+      const {login, user, logout} = useContext(AuthContext);
 
       const {searchMovies} = useContext(MoviesContext);
-
-      const logout = () =>{
-        setUser(null);
-
-    }
 
       const handleSearch = () => {
         console.log("search term", searchInput.current.value);
@@ -110,8 +103,8 @@ function Header(){
                   </Button>
                 </Search>
                 <div>
-                  {user ? (<Button onClick={logout} variant="">Logout</Button>) : <Button onClick={login} variant="contained">Login</Button>}
-                  <Link to="/register">Register</Link>
+                  {user ? (<Button onClick={logout} variant="">Logout</Button>) : <Button onClick={ login } variant="contained">Login</Button>}
+                  {!user && <Link to="/register">Register</Link>}
                   {/* <IconButton onClick={login}>
                     <AccountCircle />
                   </IconButton> */}

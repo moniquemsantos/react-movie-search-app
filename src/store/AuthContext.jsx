@@ -1,5 +1,5 @@
-import { createContext,  useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createContext,  useState, useEffect } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../config/firebaseConfig";
 
 
@@ -7,7 +7,7 @@ export const AuthContext = createContext();
 
 
 export const AuthContextProvider = (props) => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     
     const register = async (email, password) => { 
         console.log(email, password);
@@ -29,16 +29,53 @@ export const AuthContextProvider = (props) => {
     }
    };
 
-   const login = () => {
-        setUser({
-            userName: "Monique",
+   const login = (email, password) => {
+        console.log("email, password", email, password);
+
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            const loggedUser = userCredential.user;
+            console.log("user", loggedUser);
+            setUser(loggedUser);
         })
-   }
+        .catch ((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(`Error: ${errorCode} - ${errorMessage}`);
+        });
+        }; 
+
+        const checkUserStatus = () => {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                  
+                  //const uid = user.uid;
+                  console.log("user is logged in");
+               
+                } else {
+                  console.log("user is not logged in");
+                }
+              });
+        }
+
+        const logout = () => {
+            signOut(auth)
+              .then(() => {
+                console.log("logout succesfull");
+                setUser(null);
+              })
+              .catch((error) => {
+                console.log("error logging out");
+              });
+          };
+
+        useEffect(() => {
+            checkUserStatus();
+          }, []);
 
     return(
-        <AuthContext.Provider value={{user, setUser, login, register}}>
+        <AuthContext.Provider value={{user, setUser, login, logout, register}}>
 {props.children}
         </AuthContext.Provider>
     );
 };
-  
