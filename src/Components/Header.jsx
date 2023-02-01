@@ -4,7 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 //import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //import IconButton from "@mui/material/IconButton";
 //import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputBase from "@mui/material/InputBase";
@@ -64,7 +64,7 @@ function Header(){
 
       let searchInput = useRef();
 
-      const {login, user, logout} = useContext(AuthContext);
+      const {user, logout} = useContext(AuthContext);
 
       const {searchMovies} = useContext(MoviesContext);
 
@@ -72,6 +72,13 @@ function Header(){
         console.log("search term", searchInput.current.value);
         searchMovies(searchInput.current.value)
       };
+
+      const navigate = useNavigate();
+
+      const handleLogin = () => {
+        navigate ("/login");
+      }
+
     
       return (
           <Box sx={{ flexGrow: 1 }}>
@@ -103,7 +110,7 @@ function Header(){
                   </Button>
                 </Search>
                 <div>
-                  {user ? (<Button onClick={logout} variant="">Logout</Button>) : <Button onClick={ login } variant="contained">Login</Button>}
+                  {user ? (<Button onClick={logout} variant="">Logout</Button>) : <Button onClick={ handleLogin } variant="contained">Login</Button>}
                   {!user && <Link to="/register">Register</Link>}
                   {/* <IconButton onClick={login}>
                     <AccountCircle />
