@@ -30,7 +30,7 @@ const Register = () => {
     const handleRegister = (event) => {
         event.preventDefault()
         register(email, password)
-    }
+    };
 
 
     return(
