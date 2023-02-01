@@ -6,6 +6,7 @@ import Header from "../Components/Header";
 import { useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../store/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const paperStyle={padding: 20, width: 300, height: "52vh", margin: "40px auto"}
@@ -15,6 +16,7 @@ const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const {register}=useContext(AuthContext)
+    const navigate = useNavigate()
 
 
     //Try do do some logic to not allow the user go further without to insert the right type of input (field email needs to be filled with email and the password needs to have 6 characters)
@@ -27,9 +29,12 @@ const Register = () => {
         setPassword(e.target.value)
     };
 
-    const handleRegister = (event) => {
+    const handleRegister = async (event) => {
         event.preventDefault()
-        register(email, password)
+        await register(email, password)
+        .then((loggedUser) => {
+            if (loggedUser) {navigate("/")}
+        });
     };
 
 

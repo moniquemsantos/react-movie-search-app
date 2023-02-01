@@ -22,6 +22,7 @@ export const AuthContextProvider = (props) => {
         const loggedUser = userCredential.user;
         console.log("user :>> ", loggedUser);
         setUser(loggedUser);
+        return(loggedUser);
       } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;
