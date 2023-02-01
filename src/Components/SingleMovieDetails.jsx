@@ -1,11 +1,15 @@
 import React from "react";
 
-function SingleMovieDetails(){
-
-    return(
-        <p>Details Page</p>
-    )
+function SingleMovieDetails({ movie }) {
+  return (
+    <div>
+      <p>Details Page</p>
+      <img
+        src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
+        alt={movie.path}
+      />
+    </div>
+  );
 }
 
 export default SingleMovieDetails;
-

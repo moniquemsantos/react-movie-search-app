@@ -8,6 +8,7 @@ import Register from "./views/Register";
 import UserProfile from "./Components/UserProfile";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { app } from "./config/firebaseConfig";
+import Details from "./views/Details";
 
 // TO-DO list :
 // create your Routes : install react-router and create routes : /, /:singleMovieDetails, /login, /register,/chat,  /userProfile,
@@ -32,6 +33,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="movie/:movieId" element={<Details />} />
           </Routes>
         </MoviesContextProvider>
       </AuthContextProvider>
