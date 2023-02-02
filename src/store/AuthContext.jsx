@@ -1,79 +1,92 @@
-import { createContext,  useState, useEffect } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../config/firebaseConfig";
-
+import { createContext, useState, useEffect, useContext } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+import { auth, db } from "../config/firebaseConfig";
+import { setDoc, doc } from "firebase/firestore";
 
 export const AuthContext = createContext();
 
-
 export const AuthContextProvider = (props) => {
-    const [user, setUser] = useState(null);
-    
-    const register = async (email, password) => { 
-        console.log(email, password);
+  const [user, setUser] = useState(null);
+  
+  const register = async (email, password) => {
+    console.log(email, password);
 
     try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-    
-        const loggedUser = userCredential.user;
-        console.log("user :>> ", loggedUser);
-        setUser(loggedUser);
-        return(loggedUser);
-      } catch (error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Error: ${errorCode} - ${errorMessage}`);
-    }
-   };
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      setDoc(doc(db, "users", email), {
+        savedMovies: []
+      })
 
-   const login = async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password)
       const loggedUser = userCredential.user;
+      console.log("user :>> ", loggedUser);
       setUser(loggedUser);
-      return (loggedUser);
+      return loggedUser;
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(`Error: ${errorCode} - ${errorMessage}`);
     }
-  }; 
+  };
 
-        const checkUserStatus = () => {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                  
-                  //const uid = user.uid;
-                  console.log("user is logged in");
-               
-                } else {
-                  console.log("user is not logged in");
-                }
-              });
-        }
+  const login = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const loggedUser = userCredential.user;
+      setUser(loggedUser);
+      return loggedUser;
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`Error: ${errorCode} - ${errorMessage}`);
+    }
+  };
 
-        const logout = () => {
-            signOut(auth)
-              .then(() => {
-                console.log("logout succesfull");
-                setUser(null);
-              })
-              .catch((error) => {
-                console.log("error logging out");
-              });
-          };
+  const checkUserStatus = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        //const uid = user.uid;
+        console.log("user is logged in");
+      } else {
+        console.log("user is not logged in");
+      }
+    });
+  };
 
-        useEffect(() => {
-            checkUserStatus();
-          }, []);
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("logout succesfull");
+        setUser(null);
+      })
+      .catch((error) => {
+        console.log("error logging out");
+      });
+  };
 
-    return(
-        <AuthContext.Provider value={{user, setUser, login, logout, register}}>
-{props.children}
-        </AuthContext.Provider>
-    );
+  useEffect(() => {
+    checkUserStatus();
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, login, logout, register }}>
+      {props.children}
+    </AuthContext.Provider>
+  );
 };
+
+export function UserAuth() {
+    return useContext(AuthContext);
+  }
