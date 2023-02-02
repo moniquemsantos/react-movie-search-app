@@ -10,6 +10,7 @@ import { Home, Login } from "@mui/icons-material";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
+import { AccountCircleOutlined } from "@mui/icons-material";
 import red from "@mui/material/colors/red";
 import { AuthContext } from "../store/AuthContext";
 import { MoviesContext } from "../store/MoviesContext";
@@ -124,6 +125,11 @@ function Header() {
             <ColorIconButton onClick={() => navigate("/")}>
               <Home />
             </ColorIconButton>
+            {user && (
+              <ColorIconButton onClick={() => navigate("/userprofile")}>
+                <AccountCircleOutlined />
+              </ColorIconButton>
+            )}
             {user ? (
               <ColorButton onClick={logout} variant="">
                 Logout
