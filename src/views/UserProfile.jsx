@@ -9,7 +9,7 @@ function UserProfile(){
     return (
       <div>
           <Header/>
-          <h2>Welcome {user?.userName} to my App</h2>
+          <h2>Account {user?.email}</h2>
       </div>
     );
 }
