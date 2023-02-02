@@ -5,7 +5,7 @@ import { MoviesContextProvider } from "./store/MoviesContext";
 import HomePage from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
-import UserProfile from "./Components/UserProfile";
+import UserProfile from "./views/UserProfile";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { app } from "./config/firebaseConfig";
 import Details from "./views/Details";
