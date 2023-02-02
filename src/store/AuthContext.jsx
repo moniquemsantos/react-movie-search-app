@@ -30,21 +30,18 @@ export const AuthContextProvider = (props) => {
     }
    };
 
-   const login = (email, password) => {
-        console.log("email, password", email, password);
-
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const loggedUser = userCredential.user;
-            console.log("user", loggedUser);
-            setUser(loggedUser);
-        })
-        .catch ((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(`Error: ${errorCode} - ${errorMessage}`);
-        });
-        }; 
+   const login = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      const loggedUser = userCredential.user;
+      setUser(loggedUser);
+      return (loggedUser);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`Error: ${errorCode} - ${errorMessage}`);
+    }
+  }; 
 
         const checkUserStatus = () => {
             onAuthStateChanged(auth, (user) => {
