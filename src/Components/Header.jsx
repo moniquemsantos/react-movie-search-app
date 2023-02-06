@@ -82,6 +82,12 @@ function Header() {
     searchMovies(searchInput.current.value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      searchMovies(searchInput.current.value);
+    }
+  };
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -98,7 +104,7 @@ function Header() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Movie Search App
+            Movie Search
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -111,6 +117,7 @@ function Header() {
               name="query"
               type="text"
               inputRef={searchInput}
+              onKeyDown={handleKeyDown}
             />
             <ColorButton
               color="secondary"
