@@ -98,7 +98,7 @@ function Header() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Movie Search
+            Movie Search App
           </Typography>
           <Search>
             <SearchIconWrapper>

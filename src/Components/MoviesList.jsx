@@ -11,8 +11,8 @@ const {movies, fetchMovies} = useContext(MoviesContext)
   }, []);
      return(
         <div className="App">
-        <h1>Popular now</h1>
-        <div className="popular-movies">
+        <h1 className="title">Popular now</h1>
+        <div className="movies-container">
           {movies && movies.map((movie) => {
             return <Movie key={movie.id} movie={movie} />;
           })}
