@@ -71,6 +71,8 @@ function Header() {
     color: "rgb(80,34,34)",
   }));
 
+  const navigate = useNavigate();
+
   let searchInput = useRef();
 
   const { user, logout } = useContext(AuthContext);
@@ -87,8 +89,6 @@ function Header() {
       searchMovies(searchInput.current.value);
     }
   };
-
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     navigate("/login");
